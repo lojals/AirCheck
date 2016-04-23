@@ -36,5 +36,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>MGLMapboxAccessToken</key>
+	<string>pk.eyJ1IjoibG9qYWxzIiwiYSI6IjhPeHF4bzgifQ.hYEX8Na-kEfco8ELkvZkgg</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>AirChecker necesita tu localización</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>AirChecket necesita tu localización para funcionar</string>
 </dict>
 </plist>
