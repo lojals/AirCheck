@@ -54,7 +54,11 @@ class ContentMenu: UIView {
          self.addConstraint(NSLayoutConstraint(item: self, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 100))
          self.addConstraint(NSLayoutConstraint(item: self, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 181))
         
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[btnReport(85)][btnLayers(85)]|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: nil, views: views))
+        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[btnReport(85)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views))
+        
+        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:[btnLayers(85)]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views))
+        
+        
         
         self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-5-[btnReport(85)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views))
         

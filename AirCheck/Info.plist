@@ -42,5 +42,10 @@
 	<string>AirChecker necesita tu localización</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>AirChecket necesita tu localización para funcionar</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>

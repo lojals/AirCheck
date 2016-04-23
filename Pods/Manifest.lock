@@ -1,13 +1,28 @@
 PODS:
+  - Alamofire (2.0.2)
   - Mapbox-iOS-SDK (3.2.1)
   - pop (1.0.9)
+  - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
+  - Alamofire (= 2.0.2)
   - Mapbox-iOS-SDK (~> 3.2.1)
   - pop (~> 1.0)
+  - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
+
+EXTERNAL SOURCES:
+  SwiftyJSON:
+    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
+
+CHECKOUT OPTIONS:
+  SwiftyJSON:
+    :commit: 2a5b70f06001316d4fb54501edc70b4084705da0
+    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 SPEC CHECKSUMS:
+  Alamofire: 8edbab00802a752bb5240cc2abe70e7e881488ad
   Mapbox-iOS-SDK: 87de5f1223264da897d122f4b0b79266242f39bd
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
+  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
 COCOAPODS: 0.39.0

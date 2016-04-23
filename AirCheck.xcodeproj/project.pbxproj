@@ -34,6 +34,10 @@
 		7AB36F4E1CCC291F005CF237 /* arrow_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB36F481CCC291F005CF237 /* arrow_up.png */; };
 		7AB36F4F1CCC291F005CF237 /* arrow_up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB36F491CCC291F005CF237 /* arrow_up@2x.png */; };
 		7AB36F501CCC291F005CF237 /* arrow_up@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB36F4A1CCC291F005CF237 /* arrow_up@3x.png */; };
+		7AB36F541CCC2AF2005CF237 /* btnMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB36F511CCC2AF2005CF237 /* btnMenu.png */; };
+		7AB36F551CCC2AF2005CF237 /* btnMenu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB36F521CCC2AF2005CF237 /* btnMenu@2x.png */; };
+		7AB36F561CCC2AF2005CF237 /* btnMenu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB36F531CCC2AF2005CF237 /* btnMenu@3x.png */; };
+		7AB36F5B1CCC3070005CF237 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB36F5A1CCC3070005CF237 /* APIManager.swift */; };
 		DE64D324CD1752ED2CA67F9A /* Pods_AirCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F76F224D527C6C7D52B53961 /* Pods_AirCheck.framework */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +86,10 @@
 		7AB36F481CCC291F005CF237 /* arrow_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_up.png; sourceTree = "<group>"; };
 		7AB36F491CCC291F005CF237 /* arrow_up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow_up@2x.png"; sourceTree = "<group>"; };
 		7AB36F4A1CCC291F005CF237 /* arrow_up@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow_up@3x.png"; sourceTree = "<group>"; };
+		7AB36F511CCC2AF2005CF237 /* btnMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnMenu.png; sourceTree = "<group>"; };
+		7AB36F521CCC2AF2005CF237 /* btnMenu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btnMenu@2x.png"; sourceTree = "<group>"; };
+		7AB36F531CCC2AF2005CF237 /* btnMenu@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btnMenu@3x.png"; sourceTree = "<group>"; };
+		7AB36F5A1CCC3070005CF237 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		A47D203E64E468CC26B35EE1 /* Pods-AirCheck.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirCheck.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AirCheck/Pods-AirCheck.debug.xcconfig"; sourceTree = "<group>"; };
 		F76F224D527C6C7D52B53961 /* Pods_AirCheck.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AirCheck.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -176,6 +184,7 @@
 				7AB36F251CCC0C15005CF237 /* GenericNavViewController.swift */,
 				7AB36F271CCC0E81005CF237 /* ContentMenu.swift */,
 				7AB36F301CCC0FA4005CF237 /* Bridge.h */,
+				7AB36F5A1CCC3070005CF237 /* APIManager.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -200,6 +209,9 @@
 		7AB36F311CCC1CFD005CF237 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				7AB36F511CCC2AF2005CF237 /* btnMenu.png */,
+				7AB36F521CCC2AF2005CF237 /* btnMenu@2x.png */,
+				7AB36F531CCC2AF2005CF237 /* btnMenu@3x.png */,
 				7AB36F451CCC291F005CF237 /* arrow_down.png */,
 				7AB36F461CCC291F005CF237 /* arrow_down@2x.png */,
 				7AB36F471CCC291F005CF237 /* arrow_down@3x.png */,
@@ -303,17 +315,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AB36F551CCC2AF2005CF237 /* btnMenu@2x.png in Resources */,
 				7AB36F431CCC21D2005CF237 /* btnReport@2x.png in Resources */,
 				7AB36F031CCBE96D005CF237 /* LaunchScreen.storyboard in Resources */,
 				7AB36F401CCC21D2005CF237 /* btnLayers@2x.png in Resources */,
 				7AB36F3F1CCC21D2005CF237 /* btnLayers.png in Resources */,
 				7AB36F361CCC1CFD005CF237 /* Mask@2x.png in Resources */,
 				7AB36F001CCBE96D005CF237 /* Assets.xcassets in Resources */,
+				7AB36F561CCC2AF2005CF237 /* btnMenu@3x.png in Resources */,
 				7AB36F441CCC21D2005CF237 /* btnReport@3x.png in Resources */,
 				7AB36EFB1CCBE96D005CF237 /* Main.storyboard in Resources */,
 				7AB36F4C1CCC291F005CF237 /* arrow_down@2x.png in Resources */,
 				7AB36F4B1CCC291F005CF237 /* arrow_down.png in Resources */,
 				7AB36F501CCC291F005CF237 /* arrow_up@3x.png in Resources */,
+				7AB36F541CCC2AF2005CF237 /* btnMenu.png in Resources */,
 				7AB36F421CCC21D2005CF237 /* btnReport.png in Resources */,
 				7AB36F411CCC21D2005CF237 /* btnLayers@3x.png in Resources */,
 				7AB36F351CCC1CFD005CF237 /* Mask.png in Resources */,
@@ -389,6 +404,7 @@
 				7AB36EF61CCBE96D005CF237 /* AppDelegate.swift in Sources */,
 				7AB36F1F1CCC0921005CF237 /* OpenOptionButton.swift in Sources */,
 				7AB36F1D1CCBFD32005CF237 /* OptionSelector.swift in Sources */,
+				7AB36F5B1CCC3070005CF237 /* APIManager.swift in Sources */,
 				7AB36F1B1CCBEE2A005CF237 /* MainController.swift in Sources */,
 				7AB36F281CCC0E81005CF237 /* ContentMenu.swift in Sources */,
 				7AB36F241CCC0BE6005CF237 /* FlexibleAlignButton.m in Sources */,
