@@ -141,7 +141,7 @@ class OptionSelector: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+
     
     func optionTapped(notification:NSNotification){
         let option = (notification.object as! Option)
@@ -156,27 +156,34 @@ class OptionSelector: UIView {
             cancelBtn.pop_addAnimation(animation, forKey: "switchAlpha")
             delegate?.extendSelector()
         }else{
-            if let opt2 = OptionTree.sharedInstance.tree?.search(option.name){
-                print(opt2.parent!.value.value)
-                print(opt2.value.value)
-                
-                tempRep.type    = opt2.parent!.value.value
-                tempRep.subType = opt2.value.value
-                
-                let animation:POPBasicAnimation =  POPBasicAnimation(propertyNamed: kPOPViewAlpha)
-                animation.toValue          = 0
-                menu.pop_addAnimation(animation, forKey: "hideMenu")
-                
-                score = ScoreView(frame: menu.frame)
-                score.alpha = 0
-                contentView.addSubview(score)
-                
-                let animation2:POPBasicAnimation =  POPBasicAnimation(propertyNamed: kPOPViewAlpha)
-                animation2.toValue          = 1
-                score.pop_addAnimation(animation2, forKey: "showMenu")
-                
-                switchBtn.setTitle("ENVIAR REPORTE", forState: .Normal)
-                
+            if option.name == "CAPAS"{
+                print("Open Layers")
+                let layer = OptionTree.sharedInstance.tree?.search(option.name)
+                menu.setOptions((layer?.children)!)
+            }else{
+                if option.key == "layer"{
+                    NSNotificationCenter.defaultCenter().postNotificationName("processLayers", object: option.value)
+                }else{
+                    if let opt2 = OptionTree.sharedInstance.tree?.search(option.name){
+                        tempRep.type    = opt2.parent!.value.value
+                        tempRep.subType = opt2.value.value
+                        
+                        let animation:POPBasicAnimation =  POPBasicAnimation(propertyNamed: kPOPViewAlpha)
+                        animation.toValue          = 0
+                        menu.pop_addAnimation(animation, forKey: "hideMenu")
+                        
+                        score = ScoreView(frame: menu.frame)
+                        score.alpha = 0
+                        contentView.addSubview(score)
+                        
+                        let animation2:POPBasicAnimation =  POPBasicAnimation(propertyNamed: kPOPViewAlpha)
+                        animation2.toValue          = 1
+                        score.pop_addAnimation(animation2, forKey: "showMenu")
+                        
+                        switchBtn.setTitle("ENVIAR REPORTE", forState: .Normal)
+                        
+                    }
+                }
             }
         }
     }

@@ -56,9 +56,9 @@ class APIManager: NSObject {
     
     func uploadReport(report:Report){
         let url = plainURL+"report/"
-        Alamofire.request(.POST, url, parameters: report.toDictionary(), encoding: .JSON, headers: nil).responseJSON { (_, _, result) -> Void in
-            print(report.toDictionary())
-            print(result.description)
+        Alamofire.request(.POST, url, parameters: report.toDictionary(), encoding: .JSON, headers: nil).responseJSON { [unowned self](_, _, result) -> Void in
+            NSNotificationCenter.defaultCenter().postNotificationName("reportCreated", object: true)
+            self.getAllReports()
         }
     }
 }

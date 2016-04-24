@@ -177,5 +177,32 @@ class OptionTree{
         let p4 = OptionNode(pol4Opt)
         pol.addChild(p4)
         
+        
+        let lyr1Opt   = Option()
+        lyr1Opt.image = "btnSin"
+        lyr1Opt.name  = "SÍNTOMAS"
+        lyr1Opt.key   = "layer"
+        lyr1Opt.value = ReportType.symptoms.rawValue
+        let l1        = OptionNode(lyr1Opt)
+        layers.addChild(l1)
+        
+        let lyr2Opt   = Option()
+        lyr2Opt.image = "btnPol"
+        lyr2Opt.name  = "POLUCIÓN"
+        lyr2Opt.key   = "layer"
+        lyr2Opt.value = ReportType.pollution.rawValue
+        let l2        = OptionNode(lyr2Opt)
+        layers.addChild(l2)
+        
+        
+        let lyr3Opt   = Option()
+        lyr3Opt.image = "btnLayers"
+        lyr3Opt.name  = "TODOS"
+        lyr3Opt.key   = "layer"
+        lyr3Opt.value = "all"
+        let l3        = OptionNode(lyr3Opt)
+        layers.addChild(l3)
+        
+        
     }
 }

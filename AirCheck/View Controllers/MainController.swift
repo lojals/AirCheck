@@ -72,11 +72,12 @@ class MainController: UIViewController {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "uploadReport:", name: "uploadReport", object: nil)
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "processLayers:", name: "processLayers", object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reportCreated:", name: "reportCreated", object: nil)
+        
         
         APIManager.sharedInstance.getAllReports()
-        
-//        let testReport = Report()
-//        API.uploadReport(testReport)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -97,8 +98,10 @@ class MainController: UIViewController {
     }
     
     func reportsLoaded(notification:NSNotification){
-//        mapView.removeAnnotations(mapView.annotations!)
-//        reports.removeAll()
+        if mapView.annotations?.count > 0{
+            mapView.removeAnnotations(mapView.annotations!)
+        }
+        reports.removeAll()
         guard let value = notification.object else{ return }
         let json = JSON(value)
         for report in json{
@@ -112,6 +115,14 @@ class MainController: UIViewController {
         }
     }
     
+    func reportCreated(notification:NSNotification){
+        let actionSheet = UIAlertController(title: "Cool! 🍃", message: "Reporte creado!", preferredStyle: UIAlertControllerStyle.ActionSheet)
+
+        let option2 = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: {(actionSheet: UIAlertAction!) in ()})
+        actionSheet.addAction(option2)
+        self.presentViewController(actionSheet, animated: true, completion: nil)
+    }
+    
     func openMenu(){
         
     }
@@ -120,6 +131,16 @@ class MainController: UIViewController {
         let report = notification.object as! Report
         report.location = self.mapView.userLocation?.coordinate
         APIManager.sharedInstance.uploadReport(report)
+    }
+    
+    func processLayers(notification:NSNotification){
+        print(notification.object!)
+        switch notification.object! as! String{
+            case "all": APIManager.sharedInstance.getAllReports()
+            case "pollution": APIManager.sharedInstance.getPollutionReports()
+            case "syptoms": APIManager.sharedInstance.getSymptomsReports()
+            default: print("default")
+        }
     }
 }
 
@@ -157,6 +178,7 @@ extension MainController:MGLMapViewDelegate{
         var annotationImage = mapView.dequeueReusableAnnotationImageWithIdentifier(subTitle!)
         if annotationImage == nil {
             let sub = subTitle != "" ? subTitle : "fire"
+            print(sub)
             var image = UIImage(named: sub!)!
             image = image.imageWithAlignmentRectInsets(UIEdgeInsetsMake(0, 0, image.size.height/2, 0))
             annotationImage = MGLAnnotationImage(image: image, reuseIdentifier: sub!)
