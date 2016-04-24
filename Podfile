@@ -7,6 +7,7 @@ pod 'Mapbox-iOS-SDK', '~> 3.2.1'
 pod 'pop', '~> 1.0'
 pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
 pod 'Alamofire', '2.0.2'
+pod 'KTCenterFlowLayout'
 end
 
 target 'AirCheckTests' do

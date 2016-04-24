@@ -11,11 +11,44 @@ import Mapbox
 import SwiftyJSON
 import pop
 
+
+class Report {
+    var idAPI:String!
+    var type:String!
+    var subType:String!
+    var location:CLLocationCoordinate2D!
+    
+    init(){
+        self.idAPI    = ""
+        self.type     = ReportType.pollution.rawValue
+        self.subType  = ReportSubType.fire.rawValue
+        self.location = CLLocationCoordinate2D(latitude: 4.622624242821189, longitude: -74.12797451019287)
+    }
+    
+    init(json:JSON){
+        self.idAPI    = json["_id"].stringValue
+        self.type     = json["json"].stringValue
+        self.subType  = json["subtype"].stringValue
+        let longitude = json["location"]["longitude"].doubleValue
+        let latitude  = json["location"]["latitude"].doubleValue
+        self.location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
+    
+    func toDictionary() -> [String : AnyObject]{
+        let location = ["longitude":self.location.longitude,"location":self.location.latitude]
+        let dic      = ["type":self.type,"subtype":self.subType,"location":location]
+        return dic as! [String : AnyObject]
+    }
+}
+
+
+
 class MainController: UIViewController {
 
     @IBOutlet weak var mapView: MGLMapView!
     var options:OptionSelector!
     var optionsPosition:NSLayoutConstraint!
+    var reports:Array<Report> =  Array<Report>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +57,7 @@ class MainController: UIViewController {
         mapView.delegate = self
         mapView.zoomLevel = 18
         mapView.showsUserLocation = true
+        
         self.addUIComponents()
         self.addUIConstraints()
         
@@ -35,7 +69,9 @@ class MainController: UIViewController {
         
         let API = APIManager()
         API.getAllReports()
-
+        
+//        let testReport = Report()
+//        API.uploadReport(testReport)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -56,31 +92,35 @@ class MainController: UIViewController {
     }
     
     func reportsLoaded(notification:NSNotification){
+//        mapView.removeAnnotations(mapView.annotations!)
+//        reports.removeAll()
         guard let value = notification.object else{ return }
         let json = JSON(value)
         for report in json{
-            let longitude = report.1["location"]["longitude"]
-            let latitude = report.1["location"]["latitude"]
-            let ann = MGLPointAnnotation()
-            ann.coordinate = CLLocationCoordinate2D(latitude: latitude.doubleValue, longitude: longitude.doubleValue)
+            let rep        = Report(json: report.1)
+            let ann        = MGLPointAnnotation()
+            ann.title      = String(reports.count)
+            ann.subtitle   = rep.subType
+            ann.coordinate = rep.location
+            reports.append(rep)
             self.mapView.addAnnotation(ann)
         }
+    }
+    
+    func openMenu(){
+        
     }
 }
 
 
 extension MainController:OptionSelectorDelegate{
-    
     func openSelector() {
-        print(mapView.zoomLevel)
-        print(mapView.userLocation?.coordinate)
         let animation:POPSpringAnimation =  POPSpringAnimation(propertyNamed: kPOPLayoutConstraintConstant)
         animation.springSpeed      = 20.0
         animation.springBounciness = 15.0
         animation.toValue          = -132
         optionsPosition.pop_addAnimation(animation, forKey: "openSelector")
     }
-    
     
     func closeSelector() {
         let animation:POPSpringAnimation =  POPSpringAnimation(propertyNamed: kPOPLayoutConstraintConstant)
@@ -93,8 +133,14 @@ extension MainController:OptionSelectorDelegate{
 
 
 extension MainController:MGLMapViewDelegate{
-    // Use the default marker; see our custom marker example for more information
     func mapView(mapView: MGLMapView, imageForAnnotation annotation: MGLAnnotation) -> MGLAnnotationImage? {
-        return nil
+        guard let subTitle = annotation.subtitle else {return nil}
+        var annotationImage = mapView.dequeueReusableAnnotationImageWithIdentifier(subTitle!)
+        if annotationImage == nil {
+            var image = UIImage(named: subTitle!)!
+            image = image.imageWithAlignmentRectInsets(UIEdgeInsetsMake(0, 0, image.size.height/2, 0))
+            annotationImage = MGLAnnotationImage(image: image, reuseIdentifier: subTitle!)
+        }
+        return annotationImage
     }
 }

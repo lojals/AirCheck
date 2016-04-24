@@ -85,12 +85,14 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-AirCheck/Alamofire.framework"
+  install_framework "Pods-AirCheck/KTCenterFlowLayout.framework"
   install_framework "${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework"
   install_framework "Pods-AirCheck/SwiftyJSON.framework"
   install_framework "Pods-AirCheck/pop.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-AirCheck/Alamofire.framework"
+  install_framework "Pods-AirCheck/KTCenterFlowLayout.framework"
   install_framework "${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework"
   install_framework "Pods-AirCheck/SwiftyJSON.framework"
   install_framework "Pods-AirCheck/pop.framework"
