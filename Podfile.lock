@@ -3,6 +3,7 @@ PODS:
   - KTCenterFlowLayout (1.1.1)
   - Mapbox-iOS-SDK (3.2.1)
   - pop (1.0.9)
+  - Socket.IO-Client-Swift (6.1.0)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
@@ -10,6 +11,7 @@ DEPENDENCIES:
   - KTCenterFlowLayout
   - Mapbox-iOS-SDK (~> 3.2.1)
   - pop (~> 1.0)
+  - Socket.IO-Client-Swift (~> 6.1.0)
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
 
 EXTERNAL SOURCES:
@@ -26,6 +28,7 @@ SPEC CHECKSUMS:
   KTCenterFlowLayout: eded079c349450dea12f7cf94b424d1bc3205519
   Mapbox-iOS-SDK: 87de5f1223264da897d122f4b0b79266242f39bd
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
+  Socket.IO-Client-Swift: b0ebbd80f039992bad6d0f74730b5a540d979520
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
 COCOAPODS: 0.39.0

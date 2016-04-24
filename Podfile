@@ -8,6 +8,7 @@ pod 'pop', '~> 1.0'
 pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
 pod 'Alamofire', '2.0.2'
 pod 'KTCenterFlowLayout'
+pod 'Socket.IO-Client-Swift', '~> 6.1.0'
 end
 
 target 'AirCheckTests' do

@@ -10,6 +10,7 @@ import UIKit
 import Mapbox
 import SwiftyJSON
 import pop
+import SocketIOClientSwift
 
 
 class Report {
@@ -35,6 +36,12 @@ class Report {
         let latitude  = json["location"]["latitude"].doubleValue
         self.level    = json["level"].intValue
         self.location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        
+        
+        print(self.location)
+        
+        
+        print("Lo logra?")
     }
     
     func toDictionary() -> [String : AnyObject]{
@@ -52,20 +59,26 @@ class MainController: UIViewController {
     var options:OptionSelector!
     var optionsPosition:NSLayoutConstraint!
     var reports:Array<Report> =  Array<Report>()
+    let socket = SocketIOClient(socketURL: NSURL(string: "http://aircheck.cloudapp.net:8081/")!, options: [.Log(false), .ForcePolling(true)])
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "AIRCHECKER"
         
-        mapView.delegate = self
-        mapView.zoomLevel = 18
+        mapView.delegate          = self
+        mapView.zoomLevel         = 18
         mapView.showsUserLocation = true
+        mapView.allowsRotating    = false
         
         self.addUIComponents()
         self.addUIConstraints()
         
         let menu = UIBarButtonItem(image: UIImage(named: "btnMenu"), style: UIBarButtonItemStyle.Plain, target: self, action: Selector("openMenu"))
         self.navigationItem.setLeftBarButtonItem(menu, animated: false)
+        
+        
+        let ting = UIBarButtonItem(image: UIImage(named: "btnTing"), style: UIBarButtonItemStyle.Plain, target: self, action: Selector("addAlert"))
+        self.navigationItem.setRightBarButtonItem(ting, animated: false)
         
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reportsLoaded:", name: "reportsLoaded", object: nil)
@@ -76,6 +89,26 @@ class MainController: UIViewController {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reportCreated:", name: "reportCreated", object: nil)
         
+        
+        socket.on("report get") { [unowned self](data, ack) -> Void in
+            let json = JSON(data)
+            let report = Report(json: json[0])
+            let ann        = MGLPointAnnotation()
+            ann.title      = String(self.reports.count + 1)
+            ann.subtitle   = report.subType
+            ann.coordinate = report.location
+            self.reports.append(report)
+            self.mapView.addAnnotation(ann)
+            
+            self.addNotifcation("")
+        }
+        
+        socket.on("connect") {data, ack in
+            print("socket connected")
+        }
+        
+        
+        socket.connect()
         
         APIManager.sharedInstance.getAllReports()
     }
@@ -142,6 +175,36 @@ class MainController: UIViewController {
             default: print("default")
         }
     }
+    
+    
+    func addNotifcation(text:String){
+        
+        var advice = "Un usuario creo un nuevo reporte"
+        
+        let notification = NotificationView(text: advice)
+        notification.showNotificationAutoDismiss()
+        self.view.addSubview(notification)
+        
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[notification]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["notification" : notification]))
+        
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[notification]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["notification" : notification]))
+    }
+    
+    
+    func addAlert(){
+        
+        var advices:[String] = ["Debes evitar la zona, te recomendamos no inhalar los gases desprendidos y localizar una ruta alternativa lo más pronto posible. Es necesario utilizar protección respiratoria y ocular.","La concentración de polvo representa un riesgo bajo. Como medida preventiva puedes llevar protección respiratoria. La exposición continua puede causar cansancio e irritación de ojos y sequedad de piel.","La concentración de polvo representa un riesgo alto. Utilice protección respiratoria. La exposición prolongada puede causar: dificultad para respirar, tos, silbidos; tos con esputo verde o amarillo, náuseas.","La concentración de polvo representa un riesgo muy alto. Utilice protección respiratoria. Encuentre una vía alternativa;. La exposición prolongada puede causar: dificultad para respirar, tos, silbidos; tos con esputo verde o amarillo, nauseas, piel azulada de las orejas o labios, dolor de pecho, inflamación de vía respiratoria."," La concentración de polvo representa un riesgo bajo. Como medida preventiva puedes llevar protección respiratoria."]
+        
+        let random = Int(arc4random_uniform(UInt32(advices.count)))
+        
+        let notification = NotificationView(text: advices[random])
+        notification.showNotification()
+        self.view.addSubview(notification)
+        
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[notification]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["notification" : notification]))
+        
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[notification]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["notification" : notification]))
+    }
 }
 
 
@@ -178,7 +241,6 @@ extension MainController:MGLMapViewDelegate{
         var annotationImage = mapView.dequeueReusableAnnotationImageWithIdentifier(subTitle!)
         if annotationImage == nil {
             let sub = subTitle != "" ? subTitle : "fire"
-            print(sub)
             var image = UIImage(named: sub!)!
             image = image.imageWithAlignmentRectInsets(UIEdgeInsetsMake(0, 0, image.size.height/2, 0))
             annotationImage = MGLAnnotationImage(image: image, reuseIdentifier: sub!)

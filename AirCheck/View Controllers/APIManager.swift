@@ -58,7 +58,7 @@ class APIManager: NSObject {
         let url = plainURL+"report/"
         Alamofire.request(.POST, url, parameters: report.toDictionary(), encoding: .JSON, headers: nil).responseJSON { [unowned self](_, _, result) -> Void in
             NSNotificationCenter.defaultCenter().postNotificationName("reportCreated", object: true)
-            self.getAllReports()
+//            self.getAllReports()
         }
     }
 }
