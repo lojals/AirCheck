@@ -22,7 +22,7 @@ class OptionCellView: UICollectionViewCell {
         
         lbl               = UILabel(frame: CGRectMake(0,65,80,12))
         lbl.textColor     = UIColor.whiteColor()
-        lbl.font          = UIFont.systemFontOfSize(11)
+        lbl.font          = UIFont.systemFontOfSize(10)
         lbl.textAlignment = .Center
         self.addSubview(lbl)
     }

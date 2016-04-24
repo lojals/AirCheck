@@ -17,12 +17,14 @@ class Report {
     var type:String!
     var subType:String!
     var location:CLLocationCoordinate2D!
+    var level:Int!
     
     init(){
         self.idAPI    = ""
         self.type     = ReportType.pollution.rawValue
         self.subType  = ReportSubType.fire.rawValue
         self.location = CLLocationCoordinate2D(latitude: 4.622624242821189, longitude: -74.12797451019287)
+        self.level    = 1
     }
     
     init(json:JSON){
@@ -31,12 +33,13 @@ class Report {
         self.subType  = json["subtype"].stringValue
         let longitude = json["location"]["longitude"].doubleValue
         let latitude  = json["location"]["latitude"].doubleValue
+        self.level    = json["level"].intValue
         self.location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
     
     func toDictionary() -> [String : AnyObject]{
-        let location = ["longitude":self.location.longitude,"location":self.location.latitude]
-        let dic      = ["type":self.type,"subtype":self.subType,"location":location]
+        let location = ["longitude":self.location.longitude,"latitude":self.location.latitude]
+        let dic      = ["type":self.type,"subtype":self.subType,"location":location,"level":level]
         return dic as! [String : AnyObject]
     }
 }
@@ -67,8 +70,10 @@ class MainController: UIViewController {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reportsLoaded:", name: "reportsLoaded", object: nil)
         
-        let API = APIManager()
-        API.getAllReports()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "uploadReport:", name: "uploadReport", object: nil)
+        
+        
+        APIManager.sharedInstance.getAllReports()
         
 //        let testReport = Report()
 //        API.uploadReport(testReport)
@@ -111,7 +116,11 @@ class MainController: UIViewController {
         
     }
     
-
+    func uploadReport(notification:NSNotification){
+        let report = notification.object as! Report
+        report.location = self.mapView.userLocation?.coordinate
+        APIManager.sharedInstance.uploadReport(report)
+    }
 }
 
 

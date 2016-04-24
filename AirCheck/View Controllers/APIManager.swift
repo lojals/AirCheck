@@ -10,6 +10,8 @@ import UIKit
 import Alamofire
 
 class APIManager: NSObject {
+    static let sharedInstance = APIManager()
+    
     let plainURL = "http://aircheck.cloudapp.net:8080/"
     
     override init() {

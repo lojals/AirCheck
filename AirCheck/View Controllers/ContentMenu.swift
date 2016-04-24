@@ -31,17 +31,6 @@ class ContentMenu: UICollectionView {
     
     func setOptions(options:[OptionNode]){
         self.options = options
-        if self.options.count < 4{
-            let flowLayout = KTCenterFlowLayout()
-            flowLayout.itemSize = CGSizeMake(84, 85)
-            flowLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
-            self.collectionViewLayout = flowLayout
-        }else{
-            let flowLayout = UICollectionViewFlowLayout()
-            flowLayout.itemSize = CGSizeMake(84, 85)
-            flowLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
-            self.collectionViewLayout = flowLayout
-        }
         self.reloadTableViewWithAnimation()
     }
     

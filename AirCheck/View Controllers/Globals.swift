@@ -17,7 +17,7 @@ enum ReportType:String{
 enum ReportSubType:String{
     case fire     = "fire"
     case smoke    = "smoke"
-    case drowming = "drowning"
+    case drowning = "drowning"
     case cough    = "cough"
     case dust     = "dust"
     case eye      = "eye"
@@ -62,12 +62,14 @@ class Option {
     var image:String!
     var value:String!
     var key:String!
+    var level:Int!
     
     init(){
         self.name       = ""
         self.image      = ""
         self.value      = ""
         self.key        = ""
+        self.level      = 1
     }
 }
 
@@ -99,90 +101,81 @@ class OptionTree{
         let synOpt   = Option()
         synOpt.image = "btnLayers"
         synOpt.name  = "SYM".uppercaseString
+        synOpt.value = ReportType.symptoms.rawValue
         let syn      = OptionNode(synOpt)
         report.addChild(syn)
         
     
         let syn1Opt = Option()
-        syn1Opt.image = "btnLayers"
-        syn1Opt.name  = "SIN 1"
+        syn1Opt.image = "cough_c"
+        syn1Opt.name  = "TOS"
+        syn1Opt.value = ReportSubType.cough.rawValue
         let s1 = OptionNode(syn1Opt)
         syn.addChild(s1)
         
         let syn2Opt = Option()
-        syn2Opt.image = "btnLayers"
-        syn2Opt.name  = "SIN 2"
+        syn2Opt.image = "drowning_c"
+        syn2Opt.name  = "FALTA DE AIRE"
+        syn2Opt.value = ReportSubType.drowning.rawValue
         let s2 = OptionNode(syn2Opt)
         syn.addChild(s2)
         
         
         let syn3Opt = Option()
-        syn3Opt.image = "btnLayers"
-        syn3Opt.name  = "SIN 3"
+        syn3Opt.image = "eye_c"
+        syn3Opt.name  = "IRRITACIÓN"
+        syn3Opt.value = ReportSubType.eye.rawValue
         let s3 = OptionNode(syn3Opt)
         syn.addChild(s3)
                 
         let syn4Opt = Option()
-        syn4Opt.image = "btnLayers"
-        syn4Opt.name  = "SIN 4"
+        syn4Opt.image = "flu_c"
+        syn4Opt.name  = "CONGESTION"
+        syn4Opt.value = ReportSubType.flu.rawValue
         let s4 = OptionNode(syn4Opt)
         syn.addChild(s4)
-        
-        let syn5Opt = Option()
-        syn5Opt.image = "btnLayers"
-        syn5Opt.name  = "SIN 1"
-        let s5 = OptionNode(syn5Opt)
-        syn.addChild(s5)
-        
-
-        let syn6Opt = Option()
-        syn6Opt.image = "btnLayers"
-        syn6Opt.name  = "SIN 3"
-        let s6 = OptionNode(syn6Opt)
-        syn.addChild(s6)
+    
         
         //
         
         let polOpt   = Option()
         polOpt.image = "btnLayers"
         polOpt.name  = "POL"
+        polOpt.value  = ReportType.pollution.rawValue
         let pol      = OptionNode(polOpt)
         report.addChild(pol)
         
         
         let pol1Opt = Option()
-        pol1Opt.image = "btnLayers"
-        pol1Opt.name  = "POL 1"
+        pol1Opt.image = "fire_c"
+        pol1Opt.name  = "FUEGO"
+        pol1Opt.value = ReportSubType.fire.rawValue
         let p1 = OptionNode(pol1Opt)
         pol.addChild(p1)
         
         
         let pol2Opt = Option()
-        pol2Opt.image = "btnLayers"
-        pol2Opt.name  = "POL 2"
+        pol2Opt.image = "dust_c"
+        pol2Opt.name  = "POLVO"
+        pol2Opt.value = ReportSubType.dust.rawValue
         let p2 = OptionNode(pol2Opt)
         pol.addChild(p2)
         
         
         let pol3Opt = Option()
-        pol3Opt.image = "btnLayers"
-        pol3Opt.name  = "POL 1"
+        pol3Opt.image = "smoke_c"
+        pol3Opt.name  = "HUMO"
+        pol3Opt.value = ReportSubType.smoke.rawValue
         let p3 = OptionNode(pol3Opt)
         pol.addChild(p3)
         
         
         let pol4Opt = Option()
-        pol4Opt.image = "btnLayers"
-        pol4Opt.name  = "POL 1"
+        pol4Opt.image = "traffic_c"
+        pol4Opt.name  = "TRAFICO"
+        pol4Opt.value = ReportSubType.traffic.rawValue
         let p4 = OptionNode(pol4Opt)
         pol.addChild(p4)
-        
-        
-        let pol5Opt = Option()
-        pol5Opt.image = "btnLayers"
-        pol5Opt.name  = "POL 1"
-        let p5 = OptionNode(pol5Opt)
-        pol.addChild(p5)
         
     }
 }

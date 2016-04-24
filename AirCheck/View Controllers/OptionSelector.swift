@@ -26,6 +26,9 @@ class OptionSelector: UIView {
     var menu:ContentMenu!
     var switchBtn:UIButton!
     var cancelBtn:UIButton!
+    var score:ScoreView!
+    
+    var tempRep:Report!
     
     
     init() {
@@ -34,6 +37,7 @@ class OptionSelector: UIView {
         self.addUIComponents()
         self.addUIConstraints()
         
+        tempRep = Report()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "optionTapped:", name: "optionTapped", object: nil)
     }
     
@@ -57,7 +61,7 @@ class OptionSelector: UIView {
         switchBtn.alpha = 0
         switchBtn.translatesAutoresizingMaskIntoConstraints = false
         switchBtn.backgroundColor = UIColor(red:0.24, green:0.60, blue:0.56, alpha:1.00)
-        switchBtn.setTitle("SÍNTOMAS", forState: .Normal)
+        switchBtn.setTitle("MOSTRAR POLUCIÓN", forState: .Normal)
         switchBtn.layer.cornerRadius = 10
         switchBtn.titleLabel?.font = UIFont.systemFontOfSize(18)
         switchBtn.addTarget(self, action: Selector("swap"), forControlEvents: .TouchUpInside)
@@ -94,15 +98,21 @@ class OptionSelector: UIView {
     }
     
     func swap(){
-        switch active{
-            case .symptoms:
-                menu.setOptions((OptionTree.sharedInstance.tree?.search("SYM")?.children)!)
-                switchBtn.setTitle("SÍNTOMAS", forState: .Normal)
-                active = .pollution
-            case .pollution:
-                active = .symptoms
-                switchBtn.setTitle("POLUCIÓN", forState: .Normal)
-                menu.setOptions((OptionTree.sharedInstance.tree?.search("POL")?.children)!)
+        if switchBtn.currentTitle == "ENVIAR REPORTE"{
+            tempRep.level = score.active
+            NSNotificationCenter.defaultCenter().postNotificationName("uploadReport", object: tempRep)
+            let _ = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: Selector("cancel"), userInfo: nil, repeats: false)
+        }else{
+            switch active{
+                case .pollution:
+                    menu.setOptions((OptionTree.sharedInstance.tree?.search("SYM")?.children)!)
+                    switchBtn.setTitle("MOSTRAR POLUCIÓN", forState: .Normal)
+                    active = .symptoms
+                case .symptoms:
+                    switchBtn.setTitle("MOSTRAR SÍNTOMAS", forState: .Normal)
+                    menu.setOptions((OptionTree.sharedInstance.tree?.search("POL")?.children)!)
+                    active = .pollution
+            }
         }
     }
     
@@ -112,6 +122,10 @@ class OptionSelector: UIView {
         menu.setOptions((OptionTree.sharedInstance.tree?.children)!)
         switchBtn.alpha = 0
         cancelBtn.alpha = 0
+        menu.alpha      = 1
+        switchBtn.setTitle("MOSTRAR POLUCIÓN", forState: .Normal)
+        score?.removeFromSuperview()
+        tempRep = Report()
     }
     
     func openOptions(){
@@ -141,6 +155,29 @@ class OptionSelector: UIView {
             switchBtn.pop_addAnimation(animation, forKey: "switchAlpha")
             cancelBtn.pop_addAnimation(animation, forKey: "switchAlpha")
             delegate?.extendSelector()
+        }else{
+            if let opt2 = OptionTree.sharedInstance.tree?.search(option.name){
+                print(opt2.parent!.value.value)
+                print(opt2.value.value)
+                
+                tempRep.type    = opt2.parent!.value.value
+                tempRep.subType = opt2.value.value
+                
+                let animation:POPBasicAnimation =  POPBasicAnimation(propertyNamed: kPOPViewAlpha)
+                animation.toValue          = 0
+                menu.pop_addAnimation(animation, forKey: "hideMenu")
+                
+                score = ScoreView(frame: menu.frame)
+                score.alpha = 0
+                contentView.addSubview(score)
+                
+                let animation2:POPBasicAnimation =  POPBasicAnimation(propertyNamed: kPOPViewAlpha)
+                animation2.toValue          = 1
+                score.pop_addAnimation(animation2, forKey: "showMenu")
+                
+                switchBtn.setTitle("ENVIAR REPORTE", forState: .Normal)
+                
+            }
         }
     }
     
