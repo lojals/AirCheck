@@ -19,7 +19,5 @@ class GenericNavViewController: UINavigationController {
         self.navigationBar.barTintColor    = UIColor(red:1.00, green:1.00, blue:1.00, alpha:1.00)
         
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor(red:0.42, green:0.42, blue:0.42, alpha:1.00),NSFontAttributeName:UIFont.systemFontOfSize(17)]
-        
-        
     }
 }

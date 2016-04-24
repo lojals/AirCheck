@@ -19,6 +19,5 @@ class OpenOptionButton: UIButton {
         UIColor(red:0.17, green:0.22, blue:0.25, alpha:1.00).setFill()
         rectanglePath.fill()
     }
-    
 
 }

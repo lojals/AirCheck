@@ -110,6 +110,8 @@ class MainController: UIViewController {
     func openMenu(){
         
     }
+    
+
 }
 
 
@@ -127,7 +129,15 @@ extension MainController:OptionSelectorDelegate{
         animation.springSpeed      = 20.0
         animation.springBounciness = 15.0
         animation.toValue          = -40
-        optionsPosition.pop_addAnimation(animation, forKey: "openSelector")
+        optionsPosition.pop_addAnimation(animation, forKey: "closeSelector")
+    }
+    
+    func extendSelector() {
+        let animation:POPSpringAnimation =  POPSpringAnimation(propertyNamed: kPOPLayoutConstraintConstant)
+        animation.springSpeed      = 20.0
+        animation.springBounciness = 15.0
+        animation.toValue          = -265
+        optionsPosition.pop_addAnimation(animation, forKey: "expandSelector")
     }
 }
 
@@ -137,9 +147,10 @@ extension MainController:MGLMapViewDelegate{
         guard let subTitle = annotation.subtitle else {return nil}
         var annotationImage = mapView.dequeueReusableAnnotationImageWithIdentifier(subTitle!)
         if annotationImage == nil {
-            var image = UIImage(named: subTitle!)!
+            let sub = subTitle != "" ? subTitle : "fire"
+            var image = UIImage(named: sub!)!
             image = image.imageWithAlignmentRectInsets(UIEdgeInsetsMake(0, 0, image.size.height/2, 0))
-            annotationImage = MGLAnnotationImage(image: image, reuseIdentifier: subTitle!)
+            annotationImage = MGLAnnotationImage(image: image, reuseIdentifier: sub!)
         }
         return annotationImage
     }

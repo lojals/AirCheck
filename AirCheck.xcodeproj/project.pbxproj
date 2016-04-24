@@ -16,7 +16,6 @@
 		7AB36F1B1CCBEE2A005CF237 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB36F1A1CCBEE2A005CF237 /* MainController.swift */; };
 		7AB36F1D1CCBFD32005CF237 /* OptionSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB36F1C1CCBFD32005CF237 /* OptionSelector.swift */; };
 		7AB36F1F1CCC0921005CF237 /* OpenOptionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB36F1E1CCC0921005CF237 /* OpenOptionButton.swift */; };
-		7AB36F241CCC0BE6005CF237 /* FlexibleAlignButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB36F231CCC0BE6005CF237 /* FlexibleAlignButton.m */; };
 		7AB36F261CCC0C15005CF237 /* GenericNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB36F251CCC0C15005CF237 /* GenericNavViewController.swift */; };
 		7AB36F281CCC0E81005CF237 /* ContentMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB36F271CCC0E81005CF237 /* ContentMenu.swift */; };
 		7AB36F351CCC1CFD005CF237 /* Mask.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB36F321CCC1CFD005CF237 /* Mask.png */; };
@@ -66,6 +65,7 @@
 		7AE38A3C1CCC4F9C00A657E2 /* smoke@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AE38A391CCC4F9C00A657E2 /* smoke@2x.png */; };
 		7AE38A3D1CCC4F9C00A657E2 /* smoke@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AE38A3A1CCC4F9C00A657E2 /* smoke@3x.png */; };
 		7AE38A3F1CCC519200A657E2 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE38A3E1CCC519200A657E2 /* Globals.swift */; };
+		7AE38A441CCC650C00A657E2 /* OptionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE38A431CCC650C00A657E2 /* OptionCellView.swift */; };
 		DE64D324CD1752ED2CA67F9A /* Pods_AirCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F76F224D527C6C7D52B53961 /* Pods_AirCheck.framework */; };
 /* End PBXBuildFile section */
 
@@ -94,8 +94,6 @@
 		7AB36F1A1CCBEE2A005CF237 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		7AB36F1C1CCBFD32005CF237 /* OptionSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionSelector.swift; sourceTree = "<group>"; };
 		7AB36F1E1CCC0921005CF237 /* OpenOptionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenOptionButton.swift; sourceTree = "<group>"; };
-		7AB36F221CCC0BE6005CF237 /* FlexibleAlignButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlexibleAlignButton.h; sourceTree = "<group>"; };
-		7AB36F231CCC0BE6005CF237 /* FlexibleAlignButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlexibleAlignButton.m; sourceTree = "<group>"; };
 		7AB36F251CCC0C15005CF237 /* GenericNavViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericNavViewController.swift; sourceTree = "<group>"; };
 		7AB36F271CCC0E81005CF237 /* ContentMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentMenu.swift; sourceTree = "<group>"; };
 		7AB36F301CCC0FA4005CF237 /* Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Bridge.h; path = AirCheck/Bridge.h; sourceTree = SOURCE_ROOT; };
@@ -146,6 +144,7 @@
 		7AE38A391CCC4F9C00A657E2 /* smoke@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "smoke@2x.png"; sourceTree = "<group>"; };
 		7AE38A3A1CCC4F9C00A657E2 /* smoke@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "smoke@3x.png"; sourceTree = "<group>"; };
 		7AE38A3E1CCC519200A657E2 /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
+		7AE38A431CCC650C00A657E2 /* OptionCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionCellView.swift; sourceTree = "<group>"; };
 		A47D203E64E468CC26B35EE1 /* Pods-AirCheck.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirCheck.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AirCheck/Pods-AirCheck.debug.xcconfig"; sourceTree = "<group>"; };
 		F76F224D527C6C7D52B53961 /* Pods_AirCheck.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AirCheck.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -210,7 +209,6 @@
 			isa = PBXGroup;
 			children = (
 				7AB36F311CCC1CFD005CF237 /* Assets */,
-				7AB36F201CCC0BE6005CF237 /* Vendor */,
 				7AB36F191CCBEE0F005CF237 /* View Controllers */,
 				7AB36EF51CCBE96D005CF237 /* AppDelegate.swift */,
 				7AB36EF91CCBE96D005CF237 /* Main.storyboard */,
@@ -242,25 +240,9 @@
 				7AB36F301CCC0FA4005CF237 /* Bridge.h */,
 				7AB36F5A1CCC3070005CF237 /* APIManager.swift */,
 				7AE38A3E1CCC519200A657E2 /* Globals.swift */,
+				7AE38A431CCC650C00A657E2 /* OptionCellView.swift */,
 			);
 			path = "View Controllers";
-			sourceTree = "<group>";
-		};
-		7AB36F201CCC0BE6005CF237 /* Vendor */ = {
-			isa = PBXGroup;
-			children = (
-				7AB36F211CCC0BE6005CF237 /* FlexibleAlignButton */,
-			);
-			path = Vendor;
-			sourceTree = "<group>";
-		};
-		7AB36F211CCC0BE6005CF237 /* FlexibleAlignButton */ = {
-			isa = PBXGroup;
-			children = (
-				7AB36F221CCC0BE6005CF237 /* FlexibleAlignButton.h */,
-				7AB36F231CCC0BE6005CF237 /* FlexibleAlignButton.m */,
-			);
-			path = FlexibleAlignButton;
 			sourceTree = "<group>";
 		};
 		7AB36F311CCC1CFD005CF237 /* Assets */ = {
@@ -526,10 +508,10 @@
 				7AB36F5B1CCC3070005CF237 /* APIManager.swift in Sources */,
 				7AB36F1B1CCBEE2A005CF237 /* MainController.swift in Sources */,
 				7AB36F281CCC0E81005CF237 /* ContentMenu.swift in Sources */,
-				7AB36F241CCC0BE6005CF237 /* FlexibleAlignButton.m in Sources */,
 				7AB36EFE1CCBE96D005CF237 /* AirCheck.xcdatamodeld in Sources */,
 				7AE38A3F1CCC519200A657E2 /* Globals.swift in Sources */,
 				7AB36F261CCC0C15005CF237 /* GenericNavViewController.swift in Sources */,
+				7AE38A441CCC650C00A657E2 /* OptionCellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
